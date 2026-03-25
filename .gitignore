@@ -1,0 +1,36 @@
+# ── API keys and secrets — NEVER push these ───────
+.env
+.env.local
+.env.*.local
+
+# ── Virtual environment ────────────────────────────
+venv/
+env/
+.venv/
+conda-env/
+
+# ── Python cache ───────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
+# ── VS Code ────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ── Jupyter checkpoints ────────────────────────────
+.ipynb_checkpoints/
+
+# ── Vector DB files (can be large) ────────────────
+data/processed/*.index
+data/processed/*.pkl
+faiss_index/
+
+# ── OS files ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Large data files ───────────────────────────────
+*.zip
+*.h5
