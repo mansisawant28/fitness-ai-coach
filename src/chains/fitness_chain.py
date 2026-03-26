@@ -1,22 +1,37 @@
 from langchain_ollama import OllamaLLM
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 import os
 
 def get_llm():
     """
-    Initialize and return the Ollama LLM.
-    We read model name from .env so it's easy to change later.
+    Smart LLM selector:
+    - Local development → Ollama (offline, free)
+    - Cloud deployment  → Groq  (online, free)
+    This is called a strategy pattern in software engineering.
     """
-    model = os.getenv("OLLAMA_MODEL", "gemma:2b")
-    llm = OllamaLLM(
-        model=model,
-        temperature=0.7,   # 0 = very focused, 1 = more creative
-        num_predict=1024   # max tokens to generate
-    )
+    deployment = os.getenv("DEPLOYMENT", "local")
+
+    if deployment == "cloud":
+        # Groq — for Streamlit Cloud deployment
+        print("🌐 Using Groq (cloud mode)")
+        llm = ChatGroq(
+            model="llama3-8b-8192",   # free and fast on Groq
+            temperature=0.7,
+            max_tokens=1024,
+            api_key=os.getenv("GROQ_API_KEY")
+        )
+    else:
+        # Ollama — for local development
+        print("💻 Using Ollama (local mode)")
+        llm = OllamaLLM(
+            model=os.getenv("OLLAMA_MODEL", "gemma:2b"),
+            temperature=0.7,
+            num_predict=1024
+        )
     return llm
 
 # ── Workout plan prompt ────────────────────────────────────────────
-# This is a template — {variables} get replaced with real user data
 WORKOUT_PROMPT = PromptTemplate(
     input_variables=[
         "age", "gender", "weight", "height", "bmi",
@@ -97,11 +112,8 @@ def generate_workout_plan(user_profile: dict) -> str:
     a personalized workout plan as a string.
     """
     llm = get_llm()
-
-    # Build the chain: prompt → llm → output
     chain = WORKOUT_PROMPT | llm
 
-    # Fill in the prompt template with user data
     response = chain.invoke({
         "age":              user_profile["age"],
         "gender":           user_profile["gender"],
@@ -116,6 +128,10 @@ def generate_workout_plan(user_profile: dict) -> str:
         "target_calories":  user_profile["target_calories"]
     })
 
+    # Groq returns an object, Ollama returns a string
+    # This handles both cases cleanly
+    if hasattr(response, "content"):
+        return response.content
     return response
 
 def generate_nutrition_plan(user_profile: dict) -> str:
@@ -124,8 +140,6 @@ def generate_nutrition_plan(user_profile: dict) -> str:
     a personalized nutrition guide as a string.
     """
     llm = get_llm()
-
-    # Build the chain: prompt → llm → output
     chain = NUTRITION_PROMPT | llm
 
     response = chain.invoke({
@@ -139,4 +153,6 @@ def generate_nutrition_plan(user_profile: dict) -> str:
         "experience":       user_profile["experience"]
     })
 
+    if hasattr(response, "content"):
+        return response.content
     return response
