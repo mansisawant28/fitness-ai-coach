@@ -1,0 +1,68 @@
+NUTRITION GUIDE KNOWLEDGE BASE
+
+CALORIE CALCULATION
+The Mifflin-St Jeor equation is the most accurate for calculating calorie needs.
+For men: BMR = (10 x weight kg) + (6.25 x height cm) - (5 x age) + 5
+For women: BMR = (10 x weight kg) + (6.25 x height cm) - (5 x age) - 161
+Sedentary lifestyle multiplier: BMR x 1.2
+Lightly active multiplier: BMR x 1.375
+Moderately active multiplier: BMR x 1.55
+Very active multiplier: BMR x 1.725
+Athlete multiplier: BMR x 1.9
+
+MACRONUTRIENTS
+Protein provides 4 calories per gram and is essential for muscle repair and growth.
+Carbohydrates provide 4 calories per gram and are the primary fuel for exercise.
+Fats provide 9 calories per gram and are essential for hormone production.
+
+PROTEIN REQUIREMENTS
+For fat loss: 2.0-2.4g protein per kg bodyweight to preserve muscle.
+For muscle gain: 1.6-2.2g protein per kg bodyweight for maximum synthesis.
+For strength: 1.6-2.0g protein per kg bodyweight.
+For sedentary individuals: 0.8g protein per kg bodyweight minimum.
+Best protein sources: chicken breast, eggs, Greek yogurt, cottage cheese,
+fish (salmon, tuna), lean beef, legumes, tofu, whey protein.
+Distribute protein evenly across 4-5 meals for optimal muscle protein synthesis.
+Each meal should contain at least 20-40g of protein to maximize synthesis.
+
+CARBOHYDRATE GUIDELINES
+Carbohydrates should make up 40-60% of total calories for active individuals.
+Complex carbs are preferred: oats, brown rice, sweet potato, quinoa, whole wheat.
+Simple carbs are best consumed around workouts for quick energy.
+Pre-workout meal should contain carbs 1-2 hours before training.
+Post-workout carbs replenish glycogen stores and aid recovery.
+Low carb diets can work for fat loss but may impair high intensity performance.
+
+FAT GUIDELINES
+Dietary fats should make up 20-35% of total daily calories.
+Essential fatty acids omega-3 and omega-6 must come from diet.
+Best fat sources: avocado, olive oil, nuts, seeds, fatty fish, eggs.
+Omega-3 fatty acids reduce inflammation and support recovery.
+Avoid trans fats found in processed foods and fried foods.
+Saturated fats should be limited to less than 10% of total calories.
+
+MEAL TIMING
+Pre-workout meal: 1-2 hours before training, focus on carbs and protein.
+Post-workout meal: within 1-2 hours after training, protein and carbs.
+The anabolic window is larger than previously thought — up to 24 hours.
+Eating protein before bed (casein) supports overnight muscle recovery.
+Intermittent fasting can work for fat loss but does not suit everyone.
+Meal frequency of 3-5 meals per day works well for most people.
+
+HYDRATION
+Water is essential for every metabolic process in the body.
+Recommended daily water intake: 35ml per kg of bodyweight.
+During exercise drink 500-750ml of water per hour of training.
+Dehydration of just 2% reduces performance by up to 20%.
+Signs of dehydration: dark urine, fatigue, headache, decreased performance.
+Electrolytes (sodium, potassium, magnesium) are lost through sweat.
+Sports drinks are only necessary for exercise lasting more than 60 minutes.
+
+SUPPLEMENTS
+Creatine monohydrate is the most researched supplement for strength and muscle.
+Creatine dose: 3-5g per day, no loading phase necessary.
+Whey protein is convenient but whole food protein is equally effective.
+Caffeine improves performance by 3-12% at doses of 3-6mg per kg bodyweight.
+Vitamin D deficiency is common and affects muscle function and recovery.
+Fish oil supplements provide omega-3 fatty acids for recovery and health.
+Most other supplements have weak evidence and are not necessary.
