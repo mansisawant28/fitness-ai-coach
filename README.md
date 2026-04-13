@@ -1,12 +1,12 @@
-# 🚀 FitCoach AI
+# FitCoach AI
 
-## 🧠 RAG-Powered Personalized Fitness & Nutrition Coach
+## RAG-Powered Personalized Fitness & Nutrition Coach
 
 I built a RAG-powered AI fitness coach that generates personalized workout and nutrition plans using LangChain, FAISS, HuggingFace embeddings, and Groq's Llama 3.3 70B — deployed live on Streamlit Cloud with persistent per-user memory.
 
 ---
 
-## 🧩 What This Project Does
+## What This Project Does
 
 FitCoach AI is an intelligent fitness assistant that creates personalized workout and nutrition plans based on user profiles and adapts over time.
 
@@ -24,7 +24,7 @@ FitCoach AI is an intelligent fitness assistant that creates personalized workou
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ### RAG Pipeline Flow
 
@@ -44,7 +44,7 @@ Output displayed in Streamlit + stored in SQLite + exported as doc file
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 | Component      | Technology |
 |----------------|------------|
@@ -60,7 +60,7 @@ Output displayed in Streamlit + stored in SQLite + exported as doc file
 
 ---
 
-## 🧠 Key Design Decisions
+## Key Design Decisions
 
 **LangChain** – Orchestration between LLMs, prompts, and retrieval  
 **FAISS** – Fast local vector similarity search, no API required  
@@ -73,7 +73,7 @@ Output displayed in Streamlit + stored in SQLite + exported as doc file
 
 ---
 
-## 📦 Retrieval Configuration
+## Retrieval Configuration
 
 - Chunk size: 500 characters  
 - Overlap: 50 characters  
@@ -83,7 +83,7 @@ Output displayed in Streamlit + stored in SQLite + exported as doc file
 
 ---
 
-## 🎯 Why This Project Matters
+## Why This Project Matters
 
 This project demonstrates:
 - End-to-end RAG system design
@@ -94,13 +94,13 @@ This project demonstrates:
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 https://fitness-ai-coach.streamlit.app
 
 ---
 
-## 📂 GitHub Repository
+## GitHub Repository
 
 https://github.com/mansisawant28/fitness-ai-coach
 
