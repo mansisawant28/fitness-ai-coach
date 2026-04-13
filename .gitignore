@@ -23,9 +23,9 @@ __pycache__/
 .ipynb_checkpoints/
 
 # ── Vector DB files (can be large) ────────────────
-data/processed/*.index
-data/processed/*.pkl
-faiss_index/
+#data/processed/*.index
+#data/processed/*.pkl
+#faiss_index/
 
 # ── OS files ───────────────────────────────────────
 .DS_Store
