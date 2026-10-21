@@ -16,7 +16,7 @@ def load_documents():
         loader_kwargs={"encoding": "utf-8"}
     )
     documents = loader.load()
-    print(f"✅ Loaded {len(documents)} documents")
+    print(f" Loaded {len(documents)} documents")
     return documents
 
 def split_documents(documents):
@@ -26,11 +26,11 @@ def split_documents(documents):
         separators=["\n\n", "\n", ".", " "]
     )
     chunks = splitter.split_documents(documents)
-    print(f"✅ Split into {len(chunks)} chunks")
+    print(f" Split into {len(chunks)} chunks")
     return chunks
 
 def build_vectorstore():
-    print("🔨 Building vector store...")
+    print(" Building vector store...")
 
     # Step 1 and 2
     documents = load_documents()
@@ -43,7 +43,7 @@ def build_vectorstore():
     # Step 5 — save to disk
     os.makedirs("data/processed", exist_ok=True)
     vectorstore.save_local(VECTORSTORE_PATH)
-    print(f"✅ Vector store saved to {VECTORSTORE_PATH}")
+    print(f"Vector store saved to {VECTORSTORE_PATH}")
 
     return vectorstore
 
@@ -54,7 +54,7 @@ def load_vectorstore():
         embeddings,
         allow_dangerous_deserialization=True
     )
-    print("✅ Vector store loaded from disk")
+    print("Vector store loaded from disk")
     return vectorstore
 
 def get_vectorstore():

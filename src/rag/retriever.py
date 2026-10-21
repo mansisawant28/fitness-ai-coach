@@ -15,5 +15,5 @@ def retrieve_relevant_content(query: str, k=3) -> str:
     # Join all retrieved chunks into one string
     content = "\n\n---\n\n".join([doc.page_content for doc in docs])
 
-    print(f"🔍 Retrieved {len(docs)} relevant chunks for: '{query}'")
+    print(f" Retrieved {len(docs)} relevant chunks for: '{query}'")
     return content
