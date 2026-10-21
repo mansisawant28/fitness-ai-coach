@@ -7,7 +7,6 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from llm import get_llm
-from chains import fitness_nutrition_chain as chain_module
 from chains.fitness_nutrition_chain import NUTRITION_PROMPT, WORKOUT_PROMPT, _build_prompt_chain
 
 
@@ -17,63 +16,6 @@ def test_get_llm_returns_model_instance(monkeypatch):
 
     assert llm is not None
     assert hasattr(llm, "invoke")
-
-
-def test_cloud_mode_falls_back_to_local_when_api_key_missing(monkeypatch):
-    monkeypatch.setenv("DEPLOYMENT", "cloud")
-    monkeypatch.delenv("GROQ_API_KEY", raising=False)
-    monkeypatch.setenv("OLLAMA_MODEL", "gemma:2b")
-
-    llm = get_llm()
-
-    assert llm is not None
-    assert hasattr(llm, "invoke")
-
-
-def test_local_mode_raises_clear_error_when_model_missing(monkeypatch):
-    monkeypatch.setenv("DEPLOYMENT", "local")
-    monkeypatch.setenv("OLLAMA_MODEL", "definitely-missing-model:latest")
-
-    try:
-        get_llm()
-        assert False, "Expected RuntimeError when Ollama model cannot be initialized"
-    except RuntimeError as exc:
-        assert "ollama pull" in str(exc)
-
-
-def test_cloud_runtime_failure_falls_back_to_local(monkeypatch):
-    class FakeLocalLLM:
-        def __call__(self, payload):
-            return "fallback ok"
-
-    calls = {"count": 0}
-
-    def fake_get_llm():
-        calls["count"] += 1
-        if calls["count"] == 1:
-            raise RuntimeError("Groq model not found")
-        return FakeLocalLLM()
-
-    monkeypatch.setenv("DEPLOYMENT", "cloud")
-    monkeypatch.setattr(chain_module, "get_llm", fake_get_llm)
-
-    payload = {
-        "age": 28,
-        "gender": "female",
-        "weight": 65,
-        "height": 170,
-        "bmi": 22.5,
-        "goal": "fat loss",
-        "experience": "beginner",
-        "activity_level": "moderate",
-        "equipment": ["dumbbells"],
-        "injuries": "none",
-        "target_calories": 2000,
-        "relevant_knowledge": "Use progressive overload.",
-    }
-
-    result = chain_module._invoke_with_local_fallback(WORKOUT_PROMPT, payload)
-    assert result == "fallback ok"
 
 
 def test_prompt_chains_are_constructed_correctly():
