@@ -34,21 +34,22 @@ def _ensure_local_model_exists(model_name: str):
 
 def get_llm(max_tokens: int = 1024):
     """
-    Smart LLM selector — Ollama locally, Groq on cloud.
+    Smart LLM selector — prefer Groq when configured, otherwise fall back to local Ollama.
     """
-    deployment = os.getenv("DEPLOYMENT", "local")
+    deployment = os.getenv("DEPLOYMENT", "local").strip().lower()
+
     if deployment == "cloud":
         groq_api_key = os.getenv("GROQ_API_KEY")
-        if not groq_api_key:
-            raise ValueError("GROQ_API_KEY is required when DEPLOYMENT=cloud.")
+        if groq_api_key:
+            llm = ChatGroq(
+                model="llama-3.3-70b-versatile",
+                temperature=0.7,
+                max_tokens=max_tokens,
+                api_key=groq_api_key,
+            )
+            return llm
 
-        llm = ChatGroq(
-            model="llama-3.3-70b-versatile",
-            temperature=0.7,
-            max_tokens=max_tokens,
-            api_key=groq_api_key,
-        )
-        return llm
+        print("Warning: GROQ_API_KEY missing; falling back to local Ollama.")
 
     model_name = os.getenv("OLLAMA_MODEL", "gemma:2b")
     _ensure_local_model_exists(model_name)

@@ -9,7 +9,7 @@ from components.profile_form import render_profile_form
 from components.plan_display import display_workout_plan, display_nutrition_plan
 from components.chat import render_chat
 from components.progress_tracker import render_progress_tracker
-from chains.fitness_chain import generate_workout_plan, generate_nutrition_plan
+from chains.fitness_nutrition_chain import generate_workout_plan, generate_nutrition_plan
 from utils.database import initialize_database, save_user_profile, load_user_profile, save_plan, load_latest_plan
 from utils.memory import get_or_create_user_id, get_user_display_name
 

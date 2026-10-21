@@ -18,15 +18,15 @@ def test_get_llm_returns_model_instance(monkeypatch):
     assert hasattr(llm, "invoke")
 
 
-def test_cloud_mode_requires_api_key(monkeypatch):
+def test_cloud_mode_falls_back_to_local_when_api_key_missing(monkeypatch):
     monkeypatch.setenv("DEPLOYMENT", "cloud")
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    monkeypatch.setenv("OLLAMA_MODEL", "gemma:2b")
 
-    try:
-        get_llm()
-        assert False, "Expected ValueError when GROQ_API_KEY is missing in cloud mode"
-    except ValueError as exc:
-        assert "GROQ_API_KEY" in str(exc)
+    llm = get_llm()
+
+    assert llm is not None
+    assert hasattr(llm, "invoke")
 
 
 def test_local_mode_raises_clear_error_when_model_missing(monkeypatch):
