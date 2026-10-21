@@ -1,3 +1,5 @@
+import os
+
 from langchain_core.prompts import PromptTemplate
 from rag.retriever import retrieve_relevant_content
 from llm import get_llm
@@ -87,6 +89,20 @@ def _build_prompt_chain(prompt_template):
     return prompt_template | get_llm()
 
 
+def _invoke_with_local_fallback(prompt_template, payload):
+    """Retry with local Ollama if the configured cloud model fails at runtime."""
+    try:
+        return _build_prompt_chain(prompt_template).invoke(payload)
+    except Exception as exc:
+        deployment = os.getenv("DEPLOYMENT", "local").strip().lower()
+        if deployment != "cloud":
+            raise
+
+        print(f"Warning: Groq generation failed ({exc}). Falling back to local Ollama.")
+        os.environ["DEPLOYMENT"] = "local"
+        return _build_prompt_chain(prompt_template).invoke(payload)
+
+
 def generate_workout_plan(user_profile: dict) -> str:
     """
     RAG-powered workout plan generation.
@@ -99,9 +115,7 @@ def generate_workout_plan(user_profile: dict) -> str:
     relevant_knowledge = retrieve_relevant_content(query, k=4)
 
     # Step 2 and 3 — Generate with context
-    chain = _build_prompt_chain(WORKOUT_PROMPT)
-
-    response = chain.invoke({
+    response = _invoke_with_local_fallback(WORKOUT_PROMPT, {
         "age":                  user_profile["age"],
         "gender":               user_profile["gender"],
         "weight":               user_profile["weight"],
@@ -129,9 +143,7 @@ def generate_nutrition_plan(user_profile: dict) -> str:
     relevant_knowledge = retrieve_relevant_content(query, k=4)
 
     # Step 2 and 3 — Generate with context
-    chain = _build_prompt_chain(NUTRITION_PROMPT)
-
-    response = chain.invoke({
+    response = _invoke_with_local_fallback(NUTRITION_PROMPT, {
         "age":                  user_profile["age"],
         "gender":               user_profile["gender"],
         "weight":               user_profile["weight"],
