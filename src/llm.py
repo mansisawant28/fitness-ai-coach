@@ -3,6 +3,8 @@ import os
 from langchain_groq import ChatGroq
 from langchain_ollama import OllamaLLM
 
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+
 
 def is_cloud() -> bool:
     return os.getenv("DEPLOYMENT", "cloud").strip().lower() == "cloud"
@@ -21,14 +23,14 @@ def _get_groq_api_key() -> str | None:
         return None
 
 
-def get_llm(max_tokens: int = 2500):
+def get_llm(max_tokens: int = 4096):
     """Groq on cloud, Ollama locally."""
     if is_cloud():
         api_key = _get_groq_api_key()
         if not api_key:
             raise RuntimeError("GROQ_API_KEY is not set in the deployment secrets.")
         return ChatGroq(
-            model="llama-3.3-70b-versatile",
+            model=GROQ_MODEL,
             temperature=0.7,
             max_tokens=max_tokens,
             api_key=api_key,
