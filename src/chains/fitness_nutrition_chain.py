@@ -1,5 +1,3 @@
-import os
-
 from langchain_core.prompts import PromptTemplate
 from rag.retriever import retrieve_relevant_content
 from llm import get_llm
@@ -90,17 +88,8 @@ def _build_prompt_chain(prompt_template):
 
 
 def _invoke_with_local_fallback(prompt_template, payload):
-    """Retry with local Ollama if the configured cloud model fails at runtime."""
-    try:
-        return _build_prompt_chain(prompt_template).invoke(payload)
-    except Exception as exc:
-        deployment = os.getenv("DEPLOYMENT", "local").strip().lower()
-        if deployment != "cloud":
-            raise
-
-        print(f"Warning: Groq generation failed ({exc}). Falling back to local Ollama.")
-        os.environ["DEPLOYMENT"] = "local"
-        return _build_prompt_chain(prompt_template).invoke(payload)
+    """Invoke the configured provider without silently switching providers."""
+    return _build_prompt_chain(prompt_template).invoke(payload)
 
 
 def generate_workout_plan(user_profile: dict) -> str:

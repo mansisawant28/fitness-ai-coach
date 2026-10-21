@@ -5,7 +5,7 @@ from langchain_ollama import OllamaLLM
 
 
 def is_cloud() -> bool:
-    return os.getenv("DEPLOYMENT", "local").strip().lower() == "cloud"
+    return os.getenv("DEPLOYMENT", "cloud").strip().lower() == "cloud"
 
 
 def get_llm(max_tokens: int = 2500):

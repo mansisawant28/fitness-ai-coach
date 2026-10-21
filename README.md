@@ -81,6 +81,13 @@ Output displayed in Streamlit + stored in SQLite + exported as doc file
 - Embedding model: all-MiniLM-L6-v2  
 - Vector size: 384  
 
+## LLM Configuration
+
+The app defaults to Groq, including on Streamlit Cloud. Configure `GROQ_API_KEY`
+in the deployment environment. To use a local Ollama instance for development,
+set `DEPLOYMENT=local` and ensure Ollama is running with the configured model
+(`OLLAMA_MODEL`, default `gemma:2b`).
+
 ---
 
 ## Why This Project Matters

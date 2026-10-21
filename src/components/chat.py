@@ -12,7 +12,7 @@ import os
 
 def get_llm():
     """Same smart LLM selector as fitness_chain.py"""
-    deployment = os.getenv("DEPLOYMENT", "local")
+    deployment = os.getenv("DEPLOYMENT", "cloud").strip().lower()
     if deployment == "cloud":
         return ChatGroq(
             model="llama-3.3-70b-versatile",

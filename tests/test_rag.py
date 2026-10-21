@@ -18,7 +18,8 @@ def test_get_llm_returns_model_instance(monkeypatch):
     assert hasattr(llm, "invoke")
 
 
-def test_prompt_chains_are_constructed_correctly():
+def test_prompt_chains_are_constructed_correctly(monkeypatch):
+    monkeypatch.setenv("DEPLOYMENT", "local")
     workout_chain = _build_prompt_chain(WORKOUT_PROMPT)
     nutrition_chain = _build_prompt_chain(NUTRITION_PROMPT)
 
