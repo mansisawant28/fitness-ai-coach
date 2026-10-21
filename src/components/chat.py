@@ -1,30 +1,15 @@
 import streamlit as st
-from langchain_ollama import OllamaLLM
-from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from rag.retriever import retrieve_relevant_content
+from llm import get_llm as get_shared_llm
 from utils.database import (
     save_chat_message,
     load_chat_history,
     clear_chat_history
 )
-import os
-
 def get_llm():
-    """Same smart LLM selector as fitness_chain.py"""
-    deployment = os.getenv("DEPLOYMENT", "cloud").strip().lower()
-    if deployment == "cloud":
-        return ChatGroq(
-            model="llama-3.3-70b-versatile",
-            temperature=0.7,
-            max_tokens=512,
-            api_key=os.getenv("GROQ_API_KEY")
-        )
-    return OllamaLLM(
-        model=os.getenv("OLLAMA_MODEL", "gemma:2b"),
-        temperature=0.7,
-        num_predict=512
-    )
+    """Use the shared provider configuration for chat responses."""
+    return get_shared_llm(max_tokens=512)
 
 def get_ai_response(
     user_message: str,

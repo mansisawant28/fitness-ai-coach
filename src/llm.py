@@ -8,10 +8,23 @@ def is_cloud() -> bool:
     return os.getenv("DEPLOYMENT", "cloud").strip().lower() == "cloud"
 
 
+def _get_groq_api_key() -> str | None:
+    api_key = os.getenv("GROQ_API_KEY")
+    if api_key:
+        return api_key
+
+    try:
+        import streamlit as st
+
+        return st.secrets.get("GROQ_API_KEY")
+    except Exception:
+        return None
+
+
 def get_llm(max_tokens: int = 2500):
     """Groq on cloud, Ollama locally."""
     if is_cloud():
-        api_key = os.getenv("GROQ_API_KEY")
+        api_key = _get_groq_api_key()
         if not api_key:
             raise RuntimeError("GROQ_API_KEY is not set in the deployment secrets.")
         return ChatGroq(
